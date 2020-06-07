@@ -1,7 +1,7 @@
 Feature: Pet
   In order to manage pet information
   As a store owner
-  I need to be able to manage the pets details in the online application
+  I need to be able to manipulate pets details in the online application
 
   Scenario: Test Case 1 - Add a new pet to the store
     Given the request body is:
@@ -53,21 +53,21 @@ Feature: Pet
     Given the request body is:
   """
   {
-    "id": "ddd",
-    "category": {
-      "id": 0,
-    },
-    "name": null,
-    "photoUrls": [
-      4246
-    ],
-    "tags": [
-      {
-        "id": 1badfg,
-        "name": "string"
-      }
-    ],
-    "status": "bbb"
+  "id": "aaa",
+  "category": {
+  "id": 0,
+  },
+  "name": null,
+  "photoUrls": [
+  4246
+  ],
+  "tags": [
+  {
+  "id": 2sad12,
+  "name": "string"
+  }
+  ],
+  "status": "bbb"
   }
   """
     When I request "/pet" using HTTP POST
@@ -97,7 +97,7 @@ Feature: Pet
   """
     When I request "/pet" using HTTP PUT
     Then the response code is 200
-    And the response body is
+      And the response body is
   """
   {
     "id": 0,
@@ -129,11 +129,11 @@ Feature: Pet
     Then the response code is 404
 
 
-  Scenario: Test case 5: Find pets by status in database
+  Scenario: Test case 5: Find pets by status
     Given the request body contains "available"
     When I request "/pet/{petId}" using HTTP GET
     Then the response code is 200
-     And the response body contains JSON:
+      And the response body contains JSON:
   """
   {
       {
@@ -174,8 +174,7 @@ Feature: Pet
    "status": "available"
    }
    """
-  Scenario: Test Case 7 - Find pets with invalid ID
-    Given the request body is:
+  Scenario: Test Case 7 - Attempt to find pets with invalid ID
   """
   666
   """
@@ -270,7 +269,7 @@ Feature: Pet
     Then the response code is 400
 
 
-  Scenario: Test case 12 - Upload picture of pet
+  Scenario: Test case 12 - Upload an image
     Given the request body is:
   """
   {
@@ -281,7 +280,7 @@ Feature: Pet
   """
     When I request "/pet/{petId}/uploadImage" using HTTP POST
     Then the response code is 200
-    And the response body is
+      And the response body is
   """
   {
     "petId": 0,
