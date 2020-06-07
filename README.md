@@ -5,7 +5,8 @@ I have completed the QA challenge to the best of my abilities at this point. Whe
 
 I have many skills to offer Jumbo including being highly motivated for the team to succeed, excellent communication with the developers and other QA's, the ability to understand acceptance criteria and test in accordance with these. Overall working towards shipping a quality working product. 
 
-* Attached Test Plan supplied with Manual Test cases created using Notion 
+* Below is a link to my Test Plan with Manual Test cases created using Notion
+https://www.notion.so/Pet-store-Test-Plan-e7c64b5b1b9f482d97d3b2cbdf4f3e8a
 
 * Attached Automated tests written in BEHAT in petstore.feature file
 
