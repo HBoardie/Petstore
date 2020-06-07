@@ -25,9 +25,9 @@ Feature: Pet
     "status": "available"
   }
   """
-    When I request "/pet" using HTTP POST
+    When I request "POST /pet"
     Then the response code is 200
-    And the response body is
+    And the response body contains JSON:
   """
   {
     "id": 0,
@@ -70,7 +70,7 @@ Feature: Pet
   "status": "bbb"
   }
   """
-    When I request "/pet" using HTTP POST
+    When I request "POST /pet"
     Then the response code is 405
 
   Scenario: Test Case 3 - Update an existing pet with valid data
@@ -95,7 +95,7 @@ Feature: Pet
     "status": "available"
   }
   """
-    When I request "/pet" using HTTP PUT
+    When I request "PUT /pet"
     Then the response code is 200
       And the response body is
   """
@@ -125,13 +125,13 @@ Feature: Pet
   {
   }
   """
-    When I request "/pet" using HTTP PUT
+    When I request "PUT /pet"
     Then the response code is 404
 
 
   Scenario: Test case 5: Find pets by status
     Given the request body contains "available"
-    When I request "/pet/{petId}" using HTTP GET
+    When I request "GET /pet/{petId}"
     Then the response code is 200
       And the response body contains JSON:
   """
@@ -151,7 +151,7 @@ Feature: Pet
   """
   1
   """
-    When I request "/pet/{petId}" using HTTP GET
+    When I request "GET /pet/{petId}"
     Then the response code is 200
       And the response body is
   """
@@ -176,9 +176,11 @@ Feature: Pet
    """
   Scenario: Test Case 7 - Attempt to find pets with invalid ID
   """
-  666
+  {
+"id": 666,
+}
   """
-    When I request "/pet/{petId}" using HTTP GET
+    When I request "GET /pet/{petId}"
     Then the response code is 404
 
   Scenario: Test case 8 - Update a pet in the store with valid form data
@@ -204,9 +206,9 @@ Feature: Pet
   }
   """
       And the following form parameters are set:
-        |petId  |name     |status     |
-        |0      |"doggie"  |"available"|
-    When I request "/pet/{petId}" using HTTP POST
+        |petId  |name     |status      |
+        |"0"    |"doggie"  |"available"|
+    When I request "POST /pet/{petId}"
     Then the response code is 200
       And the response body is
   """
@@ -221,12 +223,12 @@ Feature: Pet
     Given the following form parameters are set:
       |petId  |name        |status   |
       |"500"  |"serbarus"  |"pending"|
-    When I request "/pet/{petId}" using HTTP POST
+    When I request "POST /pet/{petId}"
     Then the response code is 404
 
 
   Scenario: Test Case 10: Delete a pet
-    Given the pet is existing in the database
+    Given the request body is:
   """
   {
     "id": 0,
@@ -254,7 +256,7 @@ Feature: Pet
     "id": 1
   }
   """
-    When I request "/pet/{petId}" using HTTP DELETE
+    When I request "DELETE /pet/{petId}"
     Then the response code is 200
 
   Scenario: Test case 11 -  Delete a pet with invalid data
@@ -298,5 +300,5 @@ Feature: Pet
     "file": "/home/hboardie/picture/neddy.png"
   }
   """
-    When I request "/pet/{petId}/uploadImage" using HTTP POST
+    When I request "POST /pet/{petId}/uploadImage"
     Then the response code is 415
